@@ -46,14 +46,14 @@ class DocUMustCLI(object):
                 tree_objs = self.get_tree_objs(tree.body)
 
                 if not module_documented:
-                    print(crayons.red(relative_path, bold=True) + crayons.yellow(" module") + " has no documentation!")
+                    print((crayons.red(relative_path, bold=True) + crayons.yellow(" module") + " has no documentation!"))
                 printed = self.print_obj_warnings(relative_path, tree_objs)
                 if printed:
                     warn_triggered = True
                     print('')
 
         if not warn_triggered:
-            print(crayons.green('Everything is documented! Good job!', bold=True))
+            print((crayons.green('Everything is documented! Good job!', bold=True)))
 
     def print_obj_warnings(self, relative_path, tree_objs):
         """Prints undocumented objects, returns True if something was printed"""
@@ -61,11 +61,11 @@ class DocUMustCLI(object):
         for tree_obj in tree_objs:
             if not tree_obj['documented']:
                 printed = True
-                print(crayons.red(
+                print((crayons.red(
                     "{relative_path}:{obj_name}".format(relative_path=relative_path, obj_name=tree_obj['name']),
                     bold=True) + "[{lineno}:{col_offset}] {obj_type} has no documentation!".format(
                     obj_type=crayons.yellow(tree_obj['type']), lineno=tree_obj['lineno'],
-                    col_offset=tree_obj['col_offset']))
+                    col_offset=tree_obj['col_offset'])))
 
             printed = self.print_obj_warnings(relative_path + ":" + tree_obj['name'], tree_obj['nodes']) or printed
         return printed
@@ -114,6 +114,6 @@ def handle(command=None):
 
 
 if __name__ == "__main__":  # Debug
-    command = input('Insert command: ')
+    command = eval(input('Insert command: '))
     command = command.split()
     handle(command)
